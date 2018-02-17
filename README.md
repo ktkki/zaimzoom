@@ -1,2 +1,2 @@
 # ZaimZoom
-No Comments
+No Comment for initial commit
