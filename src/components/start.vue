@@ -3,7 +3,7 @@
     h1 ZaimZoom
     h2 Essential Links
     ul
-      li: a(href="#" target="_blank") Core Docs
+      li: a(@click="click") Core Docs
       li: a(href="#" target="_blank") Forum
       li: a(href="#" target="_blank") Gitter Chat
       li: a(href="#" target="_blank") Twitter
@@ -17,18 +17,24 @@
 
 <script>
 export default {
-  name: 'index',
-  data () {
+  name: "index",
+  data() {
     return {
-      msg: 'Welcome to Your Vue.js App'
-    }
-  }
-}
+      name: "test",
+    };
+  },
+  method: {
+    click() {
+      console.log("test");
+    },
+  },
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h1, h2 {
+h1,
+h2 {
   font-weight: normal;
 }
 ul {
