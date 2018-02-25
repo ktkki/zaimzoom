@@ -1,0 +1,4 @@
+// Data
+export const FETCH_CODES = "FETCH_CODES";
+export const FETCH_CATEGORIES = "FETCH_CATEGORIES";
+export const PICK_COMPANIES = "PICK_COMPANIES";
