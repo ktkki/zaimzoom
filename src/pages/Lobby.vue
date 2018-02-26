@@ -1,7 +1,7 @@
 <template lang="pug">
   div#app
     h3 会社を探しています・・・
-    ul(v-for="company in companies")
+    ul(v-for="company in pickedCompanies")
       li: span {{ company.name }}
     router-link(to = "/quiz", tag = "button") はじめる
     button(@click = "pickCompanies(5)") やりなおす
@@ -16,13 +16,24 @@ export default {
   data() {
     return {};
   },
-  computed: mapState({
-    picked: state => state.data.picked,
-    companies: state => state.data.companies,
-  }),
+  computed: {
+    ...mapState({
+      pickedCompanies: state => state.data.pickedCompanies,
+      securityCodes: state => state.data.securityCodes,
+      categories: state => state.data.categories,
+    }),
+  },
   beforeMount() {
-    this.fetchCodes();
-    this.fetchCategories();
+    if (!Object.keys(this.securityCodes).length) {
+      this.fetchCodes().then(() => {
+        this.pickCompanies(5);
+      });
+    } else {
+      this.pickCompanies(5);
+    }
+    if (!Object.keys(this.categories)) {
+      this.fetchCategories();
+    }
   },
   methods: {
     ...mapActions({

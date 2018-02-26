@@ -8,5 +8,5 @@ export const REMOVE_OVERLAY = "REMOVE_OVERLAY";
 // Data
 export const UPDATE_CODES = "UPDATE_CODES";
 export const UPDATE_CATEGORIES = "UPDATE_CATEGORIES";
-export const UPDATE_PICKED = "UPDATE_PICKED";
 export const ADD_COMPANY = "ADD_COMPANY";
+export const CLEAR_COMPANIES = "CLEAR_COMPANIES";

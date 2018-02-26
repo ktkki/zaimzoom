@@ -10,8 +10,7 @@ const data = {
   state: {
     securityCodes: [],
     categories: [],
-    companies: {},
-    picked: [],
+    pickedCompanies: {},
   },
 
   getters: {},
@@ -24,28 +23,26 @@ const data = {
       state.categories = payload;
     },
     [mutations.ADD_COMPANY](state, payload) {
-      Vue.set(state.companies, payload.id, payload);
+      Vue.set(state.pickedCompanies, payload.id, payload);
     },
-    [mutations.UPDATE_PICKED](state, payload) {
-      state.picked = payload;
+    [mutations.CLEAR_COMPANIES](state, payload) {
+      state.pickedCompanies = {};
     },
   },
 
   actions: {
     [actions.FETCH_CODES](context) {
-      api
+      return api
         .get("/codes")
         .then(res => {
           context.commit(mutations.UPDATE_CODES, res.data);
-          // TODO Don't call pick_companies here
-          context.dispatch(actions.PICK_COMPANIES, 5);
         })
         .catch(error => {
           console.log(context, error);
         });
     },
     [actions.FETCH_CATEGORIES](context) {
-      api
+      return api
         .get("/categories")
         .then(res => {
           context.commit(mutations.UPDATE_CATEGORIES, res.data);
@@ -55,8 +52,8 @@ const data = {
         });
     },
     [actions.PICK_COMPANIES](context, payload) {
-      let picked = sampleSize(context.state.securityCodes, 5);
-      context.commit(mutations.UPDATE_PICKED, picked);
+      let picked = sampleSize(context.state.securityCodes, payload);
+      context.commit(mutations.CLEAR_COMPANIES);
       for (let i in picked) {
         api
           .get(`/companies/${picked[i].code}`)
