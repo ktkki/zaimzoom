@@ -9,4 +9,6 @@ export const REMOVE_OVERLAY = "REMOVE_OVERLAY";
 export const UPDATE_CODES = "UPDATE_CODES";
 export const UPDATE_CATEGORIES = "UPDATE_CATEGORIES";
 export const ADD_COMPANY = "ADD_COMPANY";
-export const CLEAR_COMPANIES = "CLEAR_COMPANIES";
+export const INIT_STAT = "INIT_STAT";
+export const SET_USER_ANSWER = "SET_USER_ANSWER";
+export const CLEAR_ANSWER = "CLEAR_ANSWER";

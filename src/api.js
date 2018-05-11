@@ -3,13 +3,12 @@ import axios from "axios";
 const api = axios.create({
   baseURL: (function() {
     if (window.location.hostname === "localhost") {
-      // drakov default port 3000
-      return "http://localhost:3000/";
+      return "http://localhost:5000/";
     } else {
-      return `${window.location.host}`;
+      return "";
     }
   })(),
-  timeout: 5000,
+  timeout: 10000,
   headers: { "X-Requested-With": "XMLHttpRequest" },
 });
 

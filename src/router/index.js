@@ -1,18 +1,19 @@
 import Vue from "vue";
 import Router from "vue-router";
-import ModeSelect from "@/pages/ModeSelect";
+import Index from "@/pages/Index";
 import Lobby from "@/pages/Lobby";
-import Quiz from "@/pages/Quiz";
+import ZaimViewer from "@/pages/ZaimViewer";
 import Result from "@/pages/Result";
+import Store from "@/store/store";
 
 Vue.use(Router);
 
-export default new Router({
+const router = new Router({
   routes: [
     {
       path: "/",
-      name: "ModeSelect",
-      component: ModeSelect,
+      name: "Index",
+      component: Index,
     },
     {
       path: "/lobby",
@@ -20,14 +21,38 @@ export default new Router({
       component: Lobby,
     },
     {
-      path: "/Quiz",
+      path: "/quiz",
       name: "Quiz",
-      component: Quiz,
+      component: ZaimViewer,
+      props: { isAnswer: false },
     },
     {
-      path: "/Result",
+      path: "/result",
       name: "Result",
       component: Result,
     },
+    {
+      path: "/answer",
+      name: "Answer",
+      component: ZaimViewer,
+      props: { isAnswer: true },
+    },
   ],
 });
+
+router.beforeEach((to, from, next) => {
+  if (to.name !== "Index") {
+    if (
+      Object.keys(Store.state.data.securityCodes).length > 0 ||
+      Object.keys(Store.state.data.categories).length > 0
+    ) {
+      next();
+    } else {
+      next({ name: "Index" });
+    }
+  } else {
+    next();
+  }
+});
+
+export default router;
